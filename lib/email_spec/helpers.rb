@@ -127,7 +127,7 @@ module EmailSpec
     end
 
     def textify_images(email_body)
-      email_body.to_s.gsub(%r{<img[^>]*alt=['"]?([^'"]*)['"]?[^>]*?/>}) { $1 }
+      email_body.to_s.gsub(%r{<img[^>]*alt=['"]?([^'"]*)['"]?[^>]*?/?>}) { $1 }
     end
 
     def parse_email_count(amount)

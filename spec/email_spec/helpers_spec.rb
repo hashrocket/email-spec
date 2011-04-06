@@ -13,6 +13,11 @@ describe EmailSpec::Helpers do
       parse_email_for_link(email, "an image").should == "/path/to/page"
     end
 
+    it "recognizes HTML4 img alt properties as text" do
+      email = Mail.new(:body => %(<a href="/path/to/page"><img src="http://host.com/images/image.gif" alt="an image"></a>))
+      parse_email_for_link(email, "an image").should == "/path/to/page"
+    end
+
     it "causes a spec to fail if the body doesn't contain the text specified to click" do
       email = Mail.new(:body => "")
       lambda { parse_email_for_link(email, "non-existent text") }.should raise_error(  RSpec::Expectations::ExpectationNotMetError)
